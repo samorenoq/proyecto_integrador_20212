@@ -10,6 +10,8 @@ import datetime
 SAMPLE_SIZE = 5
 PORTFOLIO_SIZE = 5
 STOCKS_FILEPATH = 'daily_data/'
+S3_TRUSTED_URI = 's3://proyecto-integrador-20212-pregrado/datasets/trusted/'
+S3_REFINED_URI = 's3://proyecto-integrador-20212-pregrado/datasets/refined/'
 
 
 # Lista de los nombres de cada archivo
@@ -22,7 +24,8 @@ df = pd.DataFrame()
 
 for stock in stocks_list:
     stock_name = stock.split('-')[0]
-    df[stock_name] = pd.read_parquet(os.path.join(STOCKS_FILEPATH, stock))['close']
+    #df[stock_name] = pd.read_parquet(os.path.join(STOCKS_FILEPATH, stock))['close']
+    df[stock_name] = pd.read_parquet(S3_TRUSTED_URI)['close']
 
 
 # Función para hallar el número de valores NA para cada acción
@@ -59,4 +62,8 @@ df_applicable_stocks.shape
 
 # Llenar los valores NA de las acciones restantes con el precio anterior / siguiente
 df_applicable_stocks_no_na = df_applicable_stocks.fillna(method='ffill').fillna(method='bfill')
+
+
+# Guardar la matriz de precios como un CSV
+df_applicable_stocks_no_na.to_parquet(S3_REFINED_URI+'matriz_precios.parquet')
 
