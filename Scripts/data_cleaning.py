@@ -7,9 +7,7 @@ import os
 import datetime
 
 
-SAMPLE_SIZE = 5
-PORTFOLIO_SIZE = 5
-STOCKS_FILEPATH = 'daily_data/'
+STOCKS_FILEPATH = '../../daily_data/'
 S3_TRUSTED_URI = 's3://proyecto-integrador-20212-pregrado/datasets/trusted/'
 S3_REFINED_URI = 's3://proyecto-integrador-20212-pregrado/datasets/refined/'
 
@@ -24,8 +22,8 @@ df = pd.DataFrame()
 
 for stock in stocks_list:
     stock_name = stock.split('-')[0]
-    #df[stock_name] = pd.read_parquet(os.path.join(STOCKS_FILEPATH, stock))['close']
-    df[stock_name] = pd.read_parquet(S3_TRUSTED_URI)['close']
+    df[stock_name] = pd.read_parquet(os.path.join(STOCKS_FILEPATH, stock))['close']
+    #df[stock_name] = pd.read_parquet(S3_TRUSTED_URI+stock)['close']
 
 
 # Función para hallar el número de valores NA para cada acción
@@ -49,12 +47,12 @@ nas_indices = np.argsort(nas)[::-1]
 nas_indices
 
 
-# Hallar el número de acciones a las que les faltan más de 252 días de datos
-stock_indices_to_remove = nas_indices[nas[nas_indices] > 252]
+# Hallar el número de acciones a las que les faltan muchos días de datos
+stock_indices_to_remove = nas_indices[nas[nas_indices] > 63]
 print(f'Se eliminarán {len(stock_indices_to_remove)} acciones de la lista de acciones elegibles')
 
 
-# Sacar de la lista las acciones a las que les falten más de 252 días de datos
+# Sacar de la lista las acciones a las que les falten muchos días de datos
 stocks_to_remove = stock_names[stock_indices_to_remove]
 df_applicable_stocks = df_after_date.drop(stocks_to_remove, axis=1)
 df_applicable_stocks.shape

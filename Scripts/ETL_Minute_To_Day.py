@@ -7,9 +7,9 @@ import os
 import boto3
 
 
-STOCKS_FILEPATH = '2020-11-25/'
-SAMPLE_SIZE = 5
-PORTFOLIO_SIZE = 5
+# # Constantes
+
+STOCKS_FILEPATH = '../../2020-11-25/'
 S3_RAW_PATH = 's3://proyecto-integrador-20212-pregrado/datasets/raw/'
 S3_TRUSTED_PATH = 's3://proyecto-integrador-20212-pregrado/datasets/trusted/'
 

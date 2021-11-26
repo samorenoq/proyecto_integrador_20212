@@ -1,3 +1,13 @@
 Repositorio en GitHub: https://github.com/samorenoq/proyecto_integrador_20212
 Fuente de datos: https://www.kaggle.com/martholi/stockminutedata/version/1
 Bucket S3 con datos originales, datos intermedios y resultados (el acceso es público): s3://proyecto-integrador-20212-pregrado/datasets
+
+Orden de ejecución:
+- ETL_Minute_To_Day.py
+- Data_Cleaning.py
+- Returns_Matrix_Generation.py
+- Exploratory_Analysis.py
+- K_Means_Clustering.py
+- KNN_Classification.py
+- Random_Portfolio_Generation.py
+- Risk_Adjusted_Comparisons_Generation.py
