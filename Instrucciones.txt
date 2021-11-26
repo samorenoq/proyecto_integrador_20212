@@ -1,0 +1,3 @@
+Repositorio en GitHub: https://github.com/samorenoq/proyecto_integrador_20212
+Fuente de datos: https://www.kaggle.com/martholi/stockminutedata/version/1
+Bucket S3 con datos originales, datos intermedios y resultados (el acceso es público): s3://proyecto-integrador-20212-pregrado/datasets
